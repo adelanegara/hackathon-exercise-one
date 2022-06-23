@@ -13,18 +13,14 @@
   ],
   "slot": [
     {
-      "date": "2022-06-30",
-      "status": "unavailable",
-      "id": 1
-    },
-    {
       "date": "2022-07-01",
+      "location": "BA1",
       "status": "unavailable",
       "id": 2
     },
     {
       "date": "2022-07-09",
-      "status": "available",
+      "status": "unavailable",
       "id": 3
     },
     {
@@ -34,7 +30,7 @@
     },
     {
       "date": "2022-07-13",
-      "status": "available",
+      "status": "unavailable",
       "id": 5
     },
     {
@@ -46,6 +42,26 @@
       "date": "2022-07-17",
       "status": "available",
       "id": 7
+    },
+    {
+      "date": "2022-07-01",
+      "status": "unavailable",
+      "id": 8
+    },
+    {
+      "date": "2022-07-17",
+      "status": "available",
+      "id": 9
+    },
+    {
+      "date": "2022-07-01",
+      "status": "unavailable",
+      "id": 10
+    },
+    {
+      "date": "2022-07-09",
+      "status": "unavailable",
+      "id": 11
     }
   ]
 }

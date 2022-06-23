@@ -57,16 +57,7 @@ const Home = (deletePhotos) => {
           <h2 className="text-lg-center">
             Hi {username}, your role is {role}
           </h2>
-          {role === "owner" && (
 
-          <div className="mb-2 mt-2">
-            <button
-              onClick={() => navigate("/add")}
-              className="btn btn-outline-dark mr-1"
-            >
-              Add Slot
-            </button>
-          </div>)}
           <table className="table">
             <thead>
               <tr>
