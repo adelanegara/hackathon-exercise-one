@@ -1,5 +1,4 @@
 {
-  "isLogin": false,
     "user": [
       {
         "username": "adele",
@@ -31,6 +30,6 @@
         "date": null,
         "status": "available"
       }
-    ],
-    "userData": null
+    ]
+
   }
