@@ -3,7 +3,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Form } from "react-bootstrap";
 
 const style = {
@@ -18,8 +18,7 @@ const style = {
   p: 4,
 };
 
-const Home = (deletePhotos) => {
-  const navigate = useNavigate();
+const Home = () => {
   const [open, setOpen] = React.useState(false);
   const handleClose = () => setOpen(false);
   const [data, setData] = useState();
@@ -32,11 +31,16 @@ const Home = (deletePhotos) => {
   };
   useEffect(() => {
     fetchData();
-  }, [data]);
+  }, []);
 
   const onDeleteSlot = async (id) => {
-    axios.delete(`http://localhost:3006/slot/${id}`);
-    toast.success("delete sucessfully");
+    axios.delete(`http://localhost:3006/slot/${id}`).then(() => {
+      fetchData()
+        .then(toast.success(`Delete slot id ${id} sucessfully`))
+        .catch((error) => {
+          toast.error(error);
+        });
+    });
   };
 
   const handleBook = async (id) => {
@@ -62,6 +66,7 @@ const Home = (deletePhotos) => {
             <thead>
               <tr>
                 <th scope="col">#</th>
+                <th scope="col">Location</th>
                 <th scope="col">Date</th>
                 <th scope="col">Status</th>
                 <th scope="col">Action</th>
@@ -71,6 +76,7 @@ const Home = (deletePhotos) => {
               {data?.map((item, index) => (
                 <tr key={index}>
                   <th scope="row">{index + 1}</th>
+                  <td>{item.location}</td>
                   <td>{item.date}</td>
                   <td>{item.status}</td>
                   <td className="d-flex flex-row">
@@ -91,7 +97,7 @@ const Home = (deletePhotos) => {
                         </button>
                       </div>
                     )}
-               {role === "user" && (
+                    {role === "user" && (
                       <button
                         className="btn btn-sm btn-primary mr-1"
                         onClick={() => handleBook(item.id)}

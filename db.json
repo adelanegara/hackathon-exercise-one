@@ -13,52 +13,66 @@
   ],
   "slot": [
     {
+      "location": "A1",
       "date": "2022-07-01",
-      "location": "BA1",
       "status": "unavailable",
       "id": 2
     },
     {
+      "location": "A19",
       "date": "2022-07-09",
       "status": "unavailable",
       "id": 3
     },
     {
+     
+      "location": "B20",
       "date": "2022-07-12",
       "status": "available",
       "id": 4
     },
     {
+  
+      "location": "B33",
       "date": "2022-07-13",
       "status": "unavailable",
       "id": 5
     },
     {
+      
+      "location": "D5",
       "date": "2022-07-22",
       "status": "available",
       "id": 6
     },
     {
+    
+      "location": "D8",
       "date": "2022-07-17",
       "status": "available",
       "id": 7
     },
     {
+      "location": "D9",
       "date": "2022-07-01",
       "status": "unavailable",
       "id": 8
     },
     {
+      "location": "F1",
       "date": "2022-07-17",
       "status": "available",
       "id": 9
     },
     {
+ 
+      "location": "F4",
       "date": "2022-07-01",
       "status": "unavailable",
       "id": 10
     },
     {
+      "location": "G6",
       "date": "2022-07-09",
       "status": "unavailable",
       "id": 11
