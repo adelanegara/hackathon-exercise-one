@@ -3,7 +3,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Form } from 'react-bootstrap';
 
 const style = {
@@ -20,6 +20,7 @@ const style = {
   
 
 const Home = (deletePhotos) => {
+    const navigate = useNavigate();
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -47,6 +48,14 @@ const Home = (deletePhotos) => {
       <h2 className="text-lg-center">
         Hi {username}, your role is {role}
       </h2>
+      <div className="mb-2 mt-2">
+              <button
+                onClick={() => navigate("/add")}
+                className="btn btn-outline-dark mr-1"
+              >
+                Add Slot
+              </button>
+            </div>
       <table className="table">
         <thead>
           <tr>
