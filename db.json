@@ -16,7 +16,7 @@
     {
       "location": "D5",
       "startDate": "2022-07-12",
-      "endDate": "2022-07-22",
+      "endDate": "2022-07-23",
       "startBooking": null,
       "endBooking": null,
       "isBooking": null,
@@ -36,7 +36,7 @@
     {
       "location": "D9",
       "startDate": "2022-06-29",
-      "endDate": "2022-07-04",
+      "endDate": "2022-07-21",
       "startBooking": null,
       "endBooking": null,
       "isBooking": null,
@@ -91,6 +91,27 @@
       "status": "pending",
       "location": "D9",
       "id": 1
+    },
+    {
+      "startBooking": "2022-07-14",
+      "endBooking": "2022-07-15",
+      "status": "pending",
+      "location": "D5",
+      "id": 2
+    },
+    {
+      "startBooking": "2022-06-30",
+      "endBooking": "2022-06-30",
+      "status": "pending",
+      "location": "D8",
+      "id": 3
+    },
+    {
+      "startBooking": "2022-06-29",
+      "endBooking": "2022-06-30",
+      "status": "pending",
+      "location": "F1",
+      "id": 4
     }
   ]
 }
