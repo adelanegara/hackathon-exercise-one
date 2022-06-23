@@ -1,7 +1,25 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios'
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import { Form } from 'react-bootstrap';
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 
 const Home = () => {
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
     const [data, setData] = useState();
     const fetchData = async () => {
         const tradeList = await axios.get("http://localhost:3006/slot");
@@ -32,6 +50,7 @@ const Home = () => {
             <td className="d-flex flex-row">
               <button
                 className="btn btn-sm btn-primary mr-1"
+                onClick={handleOpen}
               >
                 Book
               </button>
@@ -39,7 +58,28 @@ const Home = () => {
           </tr>
         ))}
       </tbody>
-    </table></div>
+    </table>    
+    <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+        <div className="row">
+            
+                    <div className="col-md-6">
+                        <Form.Group controlId="dob">
+                            <Form.Label>Select Date</Form.Label>
+                            <Form.Control type="date" name="dob" placeholder="Date of Birth" />
+                        </Form.Group>
+                    </div>
+                </div>
+          <button className="btn btn-secondary" >
+            Buy
+          </button>
+        </Box>
+      </Modal></div>
   )
 }
 
