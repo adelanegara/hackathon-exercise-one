@@ -5,7 +5,8 @@ import { useNavigate, useParams } from "react-router-dom";
 
 const Edit = () => {
   const navigate = useNavigate();
-  const [date, setDate] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const [data, setData] = useState("");
   const { id } = useParams();
 
@@ -13,7 +14,8 @@ const Edit = () => {
     const fetchData = async () => {
       axios.get(`http://localhost:3006/slot/${id}`).then((response) => {
         setData(response.data);
-        setDate(response.data.date);
+        setStartDate(response.data.startDate);
+        setEndDate(response.data.endDate);
       });
     };
     fetchData();
@@ -23,7 +25,8 @@ const Edit = () => {
     e.preventDefault();
     const payload = {
       ...data,
-      date,
+      startDate,
+      endDate,
     };
 
     axios
@@ -33,7 +36,6 @@ const Edit = () => {
         navigate("/");
       })
       .catch((error) => toast.error(error));
-    //
   };
 
   return (
@@ -47,13 +49,23 @@ const Edit = () => {
         </button>
         <div className="col-md-6 mx-auto shadow p-5">
           <form>
-            <div className="form-group">
-              <label>Date</label>
+          <div className="form-group">
+              <label>Start Date</label>
               <input
                 className="form-control"
                 type="date"
-                onChange={(e) => setDate(e.target.value)}
-                value={date}
+                min={startDate}
+                onChange={(e) => setEndDate(e.target.value)}
+                value={endDate}
+              />
+            </div>
+            <div className="form-group">
+              <label>End Date</label>
+              <input
+                className="form-control"
+                type="date"
+                onChange={(e) => setEndDate(e.target.value)}
+                value={endDate}
               />
             </div>
             <div className="form-group d-flex align-items-center justify-content-between my-2">
