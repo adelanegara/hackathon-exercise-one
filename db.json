@@ -13,69 +13,92 @@
   ],
   "slot": [
     {
-      "location": "A1",
-      "date": "2022-07-01",
-      "status": "unavailable",
+      "location": "A19",
+      "startDate": "2022-07-03",
+      "endDate": "2022-07-07",
+      "startBooking": null,
+      "endBooking": null,
+      "status": "available",
+      "id": 1
+    },
+    {
+      "location": "B20",
+      "startDate": "2022-07-12",
+      "endDate": "2022-07-15",
+      "startBooking": null,
+      "endBooking": null,
+      "status": "available",
       "id": 2
     },
     {
-      "location": "A19",
-      "date": "2022-07-09",
-      "status": "unavailable",
+      "location": "B33",
+      "startDate": "2022-07-12",
+      "endDate": "2022-07-15",
+      "startBooking": null,
+      "endBooking": null,
+      "status": "available",
       "id": 3
     },
     {
-     
-      "location": "B20",
-      "date": "2022-07-12",
+      "location": "D5",
+      "startDate": "2022-07-12",
+      "endDate": "2022-07-19",
       "status": "available",
       "id": 4
     },
     {
-  
-      "location": "B33",
-      "date": "2022-07-13",
-      "status": "unavailable",
+      "location": "D8",
+      "startDate": "2022-06-29",
+      "endDate": "2022-07-04",
+      "startBooking": null,
+      "endBooking": null,
+      "status": "available",
       "id": 5
     },
     {
-      
-      "location": "D5",
-      "date": "2022-07-22",
+      "location": "D9",
+      "startDate": "2022-06-29",
+      "endDate": "2022-07-04",
+      "startBooking": null,
+      "endBooking": null,
       "status": "available",
       "id": 6
     },
     {
-    
-      "location": "D8",
-      "date": "2022-07-17",
+      "location": "F1",
+      "startDate": "2022-06-29",
+      "endDate": "2022-07-08",
+      "startBooking": null,
+      "endBooking": null,
       "status": "available",
       "id": 7
     },
     {
-      "location": "D9",
-      "date": "2022-07-01",
-      "status": "unavailable",
+      "location": "F4",
+      "startDate": "2022-06-26",
+      "endDate": "2022-07-04",
+      "startBooking": null,
+      "endBooking": null,
+      "status": "available",
       "id": 8
     },
     {
-      "location": "F1",
-      "date": "2022-07-17",
+      "location": "G6",
+      "startDate": "2022-06-27",
+      "endDate": "2022-06-28",
+      "startBooking": null,
+      "endBooking": null,
       "status": "available",
       "id": 9
     },
     {
- 
-      "location": "F4",
-      "date": "2022-07-01",
-      "status": "unavailable",
+      "location": "H4",
+      "startDate": "2022-06-27",
+      "endDate": "2022-06-28",
+      "startBooking": null,
+      "endBooking": null,
+      "status": "available",
       "id": 10
-    },
-    {
-      "location": "G6",
-      "date": "2022-07-09",
-      "status": "unavailable",
-      "id": 11
     }
   ]
 }

@@ -67,7 +67,8 @@ const Home = () => {
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Location</th>
-                <th scope="col">Date</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">End Date</th>
                 <th scope="col">Status</th>
                 <th scope="col">Action</th>
               </tr>
@@ -77,7 +78,8 @@ const Home = () => {
                 <tr key={index}>
                   <th scope="row">{index + 1}</th>
                   <td>{item.location}</td>
-                  <td>{item.date}</td>
+                  <td>{item.startDate}</td>
+                  <td>{item.endDate}</td>
                   <td>{item.status}</td>
                   <td className="d-flex flex-row">
                     {role === "owner" && (

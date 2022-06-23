@@ -1,30 +1,39 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
+import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 
 const Edit = () => {
   const navigate = useNavigate();
-  const [status, setStatus] = useState("available");
   const [date, setDate] = useState("");
+  const [data, setData] = useState("");
   const { id } = useParams();
 
-  const fetchData = async () => {
-    const getData = await axios.get(`http://localhost:3006/slot/${id}`);
-    setStatus(getData.data.status);
-    setDate(getData.data.date);
-  };
   useEffect(() => {
-    fetchData();
-  });
-
-  const edit = () => {
-    const data = {
-      date,
-      status,
+    const fetchData = async () => {
+      axios.get(`http://localhost:3006/slot/${id}`).then((response) => {
+        setData(response.data);
+        setDate(response.data.date);
+      });
     };
-    axios.post("http://localhost:3006/slot/", data);
-    navigate("/");
+    fetchData();
+  }, []);
+
+  const edit = (e) => {
+    e.preventDefault();
+    const payload = {
+      ...data,
+      date,
+    };
+
+    axios
+      .put(`http://localhost:3006/slot/${id}`, payload)
+      .then(() => {
+        toast.success(`update date for location ${data.location} successfully`);
+        navigate("/");
+      })
+      .catch((error) => toast.error(error));
+    //
   };
 
   return (
@@ -39,30 +48,28 @@ const Edit = () => {
         <div className="col-md-6 mx-auto shadow p-5">
           <form>
             <div className="form-group">
+              <label>Date</label>
               <input
                 className="form-control"
                 type="date"
-                placeholder="Date yyyy-mmmm-dddd"
                 onChange={(e) => setDate(e.target.value)}
+                value={date}
               />
             </div>
-            <div className="form-group pt-1">
-              <select id="status">
-                <option value="available">Available</option>
-                <option value="unavailable">Unavailable</option>
-              </select>
-            </div>
-
             <div className="form-group d-flex align-items-center justify-content-between my-2">
-              <button type="submit" className="btn btn-primary" onClick={edit}>
-                Update Slot
+              <button
+                type="submit"
+                className="btn btn-primary"
+                onClick={(e) => edit(e)}
+              >
+                Update
               </button>
               <button
                 type="button"
                 className="btn btn-danger"
                 onClick={() => navigate("/")}
               >
-                cancel
+                Cancel
               </button>
             </div>
           </form>
