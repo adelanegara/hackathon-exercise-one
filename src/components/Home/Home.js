@@ -33,8 +33,8 @@ const Home = () => {
     fetchData();
   }, []);
   return (
-    <div>
-      <h2>
+    <div className="mb-2 mt-2">
+      <h2 className="text-lg-center">
         Hi {username}, your role is {role}
       </h2>
       <table className="table">
