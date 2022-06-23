@@ -19,7 +19,7 @@ function App() {
       </div>
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/booking" element={<Booking />} />
+        <Route path="/booking/:id" element={<Booking />} />
         <Route path="/edit/:id" element={<Edit />} />
         <Route path="/" element={<PrivateRoutes component={Home} />} />
       </Routes>
