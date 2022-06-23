@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
+import { Link } from "react-router-dom";
 import { Form } from 'react-bootstrap';
 
 const style = {
@@ -17,7 +19,7 @@ const style = {
   };
   
 
-const Home = () => {
+const Home = (deletePhotos) => {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -32,8 +34,16 @@ const Home = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  const onDeletePhotos = (id) => {
+    deletePhotos(id);
+    toast.dark("Delete successfuly");
+  };
+
   return (
-    <div className="mb-2 mt-2">
+    <div className="container">
+        <div className="row  d-flex flex-column"> 
+        <div className="col-md-10 mx-auto my-4">
       <h2 className="text-lg-center">
         Hi {username}, your role is {role}
       </h2>
@@ -44,6 +54,7 @@ const Home = () => {
             <th scope="col">Date</th>
             <th scope="col">Status</th>
             <th scope="col">Action</th>
+            <th scope ="col">Book</th>
           </tr>
         </thead>
         <tbody>
@@ -52,6 +63,21 @@ const Home = () => {
               <th scope="row">{index + 1}</th>
               <td>{item.date}</td>
               <td>{item.status}</td>
+              <td className="d-flex flex-row">
+                        <Link
+                          to={`/edit/${item.id}`}
+                          className="btn btn-sm btn-primary mr-1"
+                        >
+                          Edit
+                        </Link>
+                        <button
+                          type="button"
+                          onClick={() => onDeletePhotos(item.id)}
+                          className="btn btn-sm btn-danger mr-1"
+                        >
+                          Delete
+                        </button>
+                      </td>
               <td className="d-flex flex-row">
                 <button className="btn btn-sm btn-primary mr-1"    onClick={handleOpen}>Book</button>
               </td>
@@ -76,10 +102,12 @@ const Home = () => {
                     </div>
                 </div>
           <button className="btn btn-secondary" >
-            Buy
+            Book
           </button>
         </Box>
       </Modal>
+      </div>
+      </div>
     </div>
   );
 };

@@ -14,16 +14,31 @@
     "slot": [
       {
         "id": "1",
-        "date": null,
+        "date": "2022-June-23",
         "status": "available"
       },
       {
         "id": "2",
-        "date": null,
+        "date": "2022-July-01",
         "status": "available"
       },
       {
         "id": "3",
+        "date": "2022-July-02",
+        "status": "available"
+      },
+      {
+        "id": "4",
+        "date": "2022-July-03",
+        "status": "available"
+      },
+      {
+        "id": "5",
+        "date": "2022-July-07",
+        "status": "available"
+      },
+      {
+        "id": "6",
         "date": null,
         "status": "available"
       }
