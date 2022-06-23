@@ -42,7 +42,6 @@ const Home = () => {
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Type</th>
             <th scope="col">Date</th>
             <th scope="col">Status</th>
             <th scope="col">Action</th>
@@ -52,7 +51,6 @@ const Home = () => {
           {data?.map((item, index) => (
             <tr key={index}>
               <th scope="row">{index + 1}</th>
-              <td>{item.type}</td>
               <td>{item.date}</td>
               <td>{item.status}</td>
               <td className="d-flex flex-row">

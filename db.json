@@ -14,19 +14,16 @@
     "slot": [
       {
         "id": "1",
-        "type": "car",
         "date": null,
         "status": "available"
       },
       {
         "id": "2",
-        "type": "bike",
         "date": null,
         "status": "available"
       },
       {
         "id": "3",
-        "type": "car",
         "date": null,
         "status": "available"
       }
