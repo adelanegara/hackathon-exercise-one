@@ -11,6 +11,7 @@ const Navbar = () => {
     toast.success("logout successfully");
     navigate("/login");
   };
+  
   return (
     <div>
       <Box sx={{ flexGrow: 1 }} data-testid="navbar">

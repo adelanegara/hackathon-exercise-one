@@ -11,20 +11,16 @@ const Add = () => {
             <div className="form-group">
               <input
                 className="form-control"
-                type="text"
+                type="date"
                 placeholder="Date yyyy-mmmm-dddd"
-                // value={title}
-                // onChange={(e) => setTitle(e.target.value)}
+   
               />
             </div>
-            <div className="form-group">
-              <input
-                className="form-control"
-                type="text"
-                placeholder="Status"
-                // value={url}
-                // onChange={(e) => setUrl(e.target.value)}
-              />
+            <div className="form-group pt-1">
+           <select id="status">
+                  <option value="available">Available</option>
+                  <option value="unavailable">Unavailable</option>
+                  </select>
             </div>
             <div className="form-group pt-3">
               <input

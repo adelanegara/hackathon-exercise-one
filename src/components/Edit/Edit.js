@@ -26,13 +26,11 @@ const Edit = () => {
          
               />
             </div>
-            <div className="form-group">
-              <input
-                className="form-control"
-                type="text"
-                placeholder="Status"
-        
-              />
+            <div className="form-group pt-1">
+           <select id="status">
+                  <option value="available">Available</option>
+                  <option value="unavailable">Unavailable</option>
+                  </select>
             </div>
       
             <div className="form-group d-flex align-items-center justify-content-between my-2">
