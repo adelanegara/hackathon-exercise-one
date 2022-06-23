@@ -37,7 +37,6 @@ const Home = () => {
       <h2>
         Hi {username}, your role is {role}
       </h2>
-      <h1>Book Parking </h1>
       <table className="table">
         <thead>
           <tr>
