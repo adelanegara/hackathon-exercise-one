@@ -23,28 +23,28 @@
       "id": 2
     },
     {
-      "date": "2022-07-02",
-      "status": "unavailable",
+      "date": "2022-07-09",
+      "status": "available",
       "id": 3
     },
     {
-      "date": "2022-07-03",
-      "status": "unavailable",
+      "date": "2022-07-12",
+      "status": "available",
       "id": 4
     },
     {
-      "date": "2022-07-06",
-      "status": "unavailable",
+      "date": "2022-07-13",
+      "status": "available",
       "id": 5
     },
     {
-      "date": "2022-07-15",
-      "status": "unavailable",
+      "date": "2022-07-22",
+      "status": "available",
       "id": 6
     },
     {
-      "date": "2022-07-24",
-      "status": "unavailable",
+      "date": "2022-07-17",
+      "status": "available",
       "id": 7
     }
   ]
