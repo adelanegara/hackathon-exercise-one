@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { Link } from "react-router-dom";
 import { Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -19,6 +20,7 @@ const style = {
 };
 
 const Home = () => {
+  const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
   const handleClose = () => setOpen(false);
   const [data, setData] = useState();
@@ -33,26 +35,7 @@ const Home = () => {
     fetchData();
   }, []);
 
-  const onDeleteSlot = async (id) => {
-    axios.delete(`http://localhost:3006/slot/${id}`).then(() => {
-      fetchData()
-        .then(toast.success(`Delete slot id ${id} sucessfully`))
-        .catch((error) => {
-          toast.error(error);
-        });
-    });
-  };
 
-  const handleBook = async (id) => {
-    const url = `http://localhost:3006/slot/${id}`;
-    axios.get(url).then((resposnse) => {
-      const payload = {
-        date: resposnse.data.date,
-        status: "unavailable",
-      };
-      axios.put(url, payload);
-    });
-  };
 
   return (
     <div className="container">
@@ -90,19 +73,13 @@ const Home = () => {
                         >
                           Edit
                         </Link>
-                        <button
-                          type="button"
-                          onClick={() => onDeleteSlot(item.id)}
-                          className="btn btn-sm btn-danger mr-1"
-                        >
-                          Delete
-                        </button>
+                    
                       </div>
                     )}
                     {role === "user" && (
                       <button
                         className="btn btn-sm btn-primary mr-1"
-                        onClick={() => handleBook(item.id)}
+                        onClick={() => navigate(`/booking/${item.id}`)}
                       >
                         {item.status === "available" ? "Book" : "Booked"}
                       </button>

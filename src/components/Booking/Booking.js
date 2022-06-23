@@ -1,9 +1,47 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const Booking = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
+  const [data, setData] = useState();
+  const [startBooking, setStartBooking] = useState();
+  const [endBooking, setEndBooking] = useState();
 
+  useEffect(() => {
+    const fetchData = async () => {
+      axios.get(`http://localhost:3006/slot/${id}`).then((response) => {
+        setData(response.data);
+      });
+    };
+    fetchData();
+  }, []);
+
+  const booking = (e) => {
+    e.preventDefault();
+    const payload = {
+      startBooking,
+      endBooking,
+      status: "pending",
+      location: data.location,
+    };
+
+    if (startBooking && endBooking) {
+      axios
+        .post("http://localhost:3006/request", payload)
+        .then(() => {
+          toast.success(
+            `request booking for location ${data.location} successfully`
+          );
+          navigate("/");
+        })
+        .catch((error) => toast.error(error));
+    } else {
+      toast.warning("please select start and end booking date");
+    }
+  };
 
   return (
     <div className="container">
@@ -15,30 +53,46 @@ const Booking = () => {
           Go back
         </button>
         <div className="col-md-6 mx-auto shadow p-5">
+          <div className="text-primary text-center mb-2">
+            <strong>Request Booking</strong>
+          </div>
           <form>
             <div className="form-group">
-              <label>Start Date</label>
+              <label>Location</label>
+              <input
+                className="form-control"
+                type="text"
+                value={data?.location}
+                disabled
+              />
+            </div>
+            <div className="form-group mt-3">
+              <label>Start Booking</label>
               <input
                 className="form-control"
                 type="date"
-              
+                min={data?.startDate}
+                max={data?.endDate}
+                onChange={(e) => setStartBooking(e.target.value)}
               />
             </div>
-            <div className="form-group pt-3">
-              <label>End Date</label>
+            <div className="form-group mt-3">
+              <label>End Booking</label>
               <input
                 className="form-control"
                 type="date"
-              
+                min={startBooking}
+                max={data?.endDate}
+                onChange={(e) => setEndBooking(e.target.value)}
               />
             </div>
-            <div className="form-group d-flex align-items-center justify-content-between my-2">
+            <div className="form-group d-flex align-items-center justify-content-between my-2 mt-3">
               <button
                 type="submit"
                 className="btn btn-primary"
-             
+                onClick={(e) => booking(e)}
               >
-                Update
+                Request
               </button>
               <button
                 type="button"
