@@ -21,7 +21,6 @@ const style = {
 const Home = (deletePhotos) => {
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [data, setData] = useState();
   const username = localStorage.getItem("username");
@@ -33,11 +32,22 @@ const Home = (deletePhotos) => {
   };
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [data]);
 
   const onDeleteSlot = async (id) => {
-    axios.put(`http://localhost:3006/slot/${id}`);
+    axios.delete(`http://localhost:3006/slot/${id}`);
     toast.success("delete sucessfully");
+  };
+
+  const handleBook = async (id) => {
+    const url = `http://localhost:3006/slot/${id}`;
+    axios.get(url).then((resposnse) => {
+      const payload = {
+        date: resposnse.data.date,
+        status: "unavailable",
+      };
+      axios.put(url, payload);
+    });
   };
 
   return (
@@ -88,13 +98,14 @@ const Home = (deletePhotos) => {
                         </button>
                       </div>
                     )}
-
-                    <button
-                      className="btn btn-sm btn-primary mr-1"
-                      onClick={handleOpen}
-                    >
-                      Book
-                    </button>
+               {role === "user" && (
+                      <button
+                        className="btn btn-sm btn-primary mr-1"
+                        onClick={() => handleBook(item.id)}
+                      >
+                        {item.status === "available" ? "Book" : "Booked"}
+                      </button>
+                    )}
                   </td>
                 </tr>
               ))}
