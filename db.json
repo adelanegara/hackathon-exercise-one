@@ -1,0 +1,36 @@
+{
+  "isLogin": false,
+    "user": [
+      {
+        "username": "adele",
+        "password": "la123",
+        "role": "owner"
+      },
+      {
+        "username": "banban",
+        "password": "ban123",
+        "role": "user"
+      }
+    ],
+    "slot": [
+      {
+        "id": "1",
+        "type": "car",
+        "date": null,
+        "status": "available"
+      },
+      {
+        "id": "2",
+        "type": "bike",
+        "date": null,
+        "status": "available"
+      },
+      {
+        "id": "3",
+        "type": "car",
+        "date": null,
+        "status": "available"
+      }
+    ],
+    "userData": null
+  }
