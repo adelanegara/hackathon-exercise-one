@@ -115,55 +115,6 @@
     }
   ],
   "request": [
-    {
-      "startBooking": "2022-06-30",
-      "endBooking": "2022-07-01",
-      "status": "pending",
-      "location": "D9",
-      "id": 1
-    },
-    {
-      "startBooking": "2022-07-14",
-      "endBooking": "2022-07-15",
-      "status": "pending",
-      "location": "D5",
-      "id": 2
-    },
-    {
-      "startBooking": "2022-06-30",
-      "endBooking": "2022-06-30",
-      "status": "pending",
-      "location": "D8",
-      "id": 3
-    },
-    {
-      "startBooking": "2022-06-29",
-      "endBooking": "2022-06-30",
-      "status": "pending",
-      "location": "F1",
-      "id": 4
-    },
-    {
-      "startBooking": "2022-06-30",
-      "endBooking": "2022-06-30",
-      "status": "pending",
-      "location": "B8",
-      "id": 5
-    },
-    {
-      "startBooking": "2022-06-28",
-      "endBooking": "2022-06-29",
-      "status": "pending",
-      "location": "B5",
-      "id": 6
-    },
-    {
-      "startBooking": "2022-06-29",
-      "endBooking": "2022-06-30",
-      "status": "waiting for approval",
-      "location": "D2",
-      "username": "banban",
-      "id": 7
-    }
+  
   ]
 }
