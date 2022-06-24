@@ -20,7 +20,7 @@
       "startBooking": null,
       "endBooking": null,
       "isBooking": null,
-      "status": "unavailable",
+      "status": "available",
       "id": 1
     },
     {
@@ -131,6 +131,15 @@
       "username": "banban",
       "idSlot": 4,
       "id": 2
+    },
+    {
+      "startBooking": "2022-06-27",
+      "endBooking": "2022-06-27",
+      "status": "waiting for approval",
+      "location": "B5",
+      "username": "banban",
+      "idSlot": 1,
+      "id": 3
     }
   ]
 }

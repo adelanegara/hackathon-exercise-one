@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { config } from "../../server/config";
+
 
 import { Button, TextField, Paper, Box, Grid, Typography } from "@mui/material";
 import { toast } from "react-toastify";
@@ -10,7 +12,7 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const url = "http://localhost:3006/user";
+  const url = config.url_user;
   const handleSubmit = async (e) => {
     e.preventDefault();
     axios

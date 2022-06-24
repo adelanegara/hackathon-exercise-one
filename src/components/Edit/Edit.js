@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { config } from "../../server/config";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import Switch from "@mui/material/Switch";
@@ -20,7 +21,7 @@ const Edit = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      axios.get(`http://localhost:3006/slot/${id}`).then((response) => {
+      axios.get(`${config.url_slot}/${id}`).then((response) => {
         setData(response.data);
         setStartDate(response.data.startDate);
         setEndDate(response.data.endDate);
@@ -51,7 +52,7 @@ const Edit = () => {
     };
 
     axios
-      .put(`http://localhost:3006/slot/${id}`, payload)
+      .put(`${config.url_slot}/${id}`, payload)
       .then(() => {
         toast.success(`update date for location ${data.location} successfully`);
         navigate("/");

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { config } from "../../server/config";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -12,7 +13,7 @@ const Booking = () => {
   const username = localStorage.getItem("username");
 
   const fetchData = async () => {
-    axios.get(`http://localhost:3006/slot/${id}`).then((response) => {
+    axios.get(`${config.url_slot}/${id}`).then((response) => {
       setData(response.data);
     });
   };
@@ -34,7 +35,7 @@ const Booking = () => {
 
     if (startBooking && endBooking) {
       axios
-        .post("http://localhost:3006/request", payload)
+        .post(config.url_request, payload)
         .then(() => {
           toast.success(
             `request booking for location ${data.location} successfully`

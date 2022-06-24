@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { config } from "../../server/config";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +12,7 @@ const Home = () => {
   const role = localStorage.getItem("role");
 
   const fetchData = async () => {
-    const slotList = await axios.get("http://localhost:3006/slot");
+    const slotList = await axios.get(config.url_slot);
     setData(slotList.data);
   };
   useEffect(() => {

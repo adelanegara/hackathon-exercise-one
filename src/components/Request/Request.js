@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { config } from "../../server/config";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
@@ -21,10 +22,11 @@ const Request = () => {
   const [open, setOpen] = React.useState(false);
   const handleClose = () => setOpen(false);
   const [data, setData] = useState();
+  const role = localStorage.getItem("role");
   const [selectedData, setSelectedData] = useState();
 
   const fetchData = async () => {
-    const reqList = await axios.get("http://localhost:3006/request");
+    const reqList = await axios.get(config.url_request);
     setData(reqList.data);
   };
   useEffect(() => {
@@ -42,8 +44,8 @@ const Request = () => {
       ...selectedData,
       status: "approved",
     };
-    const urlRequest = `http://localhost:3006/request/${selectedData.id}`;
-    const urlSlot = `http://localhost:3006/slot/${selectedData.idSlot}`;
+    const urlRequest = `${config.url_request}/${selectedData.id}`;
+    const urlSlot = `${config.url_slot}/${selectedData.idSlot}`;
     axios
       .put(urlRequest, payload)
       .then(() => {
@@ -69,7 +71,7 @@ const Request = () => {
     };
 
     axios
-      .put(`http://localhost:3006/request/${selectedData.id}`, payload)
+      .put(`${config.url_request}/${selectedData.id}`, payload)
       .then(() => {
         toast.warning(`request booking ${selectedData.location} declined`);
         handleClose();
@@ -113,7 +115,9 @@ const Request = () => {
                 <th scope="col">Status</th>
                 <th scope="col">Location</th>
                 <th scope="col">Username</th>
+                {role === "owner" && (
                 <th scope="col">Action</th>
+                )}
               </tr>
             </thead>
             <tbody>
@@ -125,6 +129,7 @@ const Request = () => {
                   <td>{item.status}</td>
                   <td>{item.location}</td>
                   <td>{item.username}</td>
+                  {role === "owner" && (
                   <td className="d-flex flex-row">
                     <div>
                       <button
@@ -143,6 +148,7 @@ const Request = () => {
                       </button>
                     </div>
                   </td>
+                  )}
                 </tr>
               ))}
             </tbody>
