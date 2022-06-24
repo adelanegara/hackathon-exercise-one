@@ -9,13 +9,15 @@ const Booking = () => {
   const [data, setData] = useState();
   const [startBooking, setStartBooking] = useState();
   const [endBooking, setEndBooking] = useState();
+  const username = localStorage.getItem("username");
+
+  const fetchData = async () => {
+    axios.get(`http://localhost:3006/slot/${id}`).then((response) => {
+      setData(response.data);
+    });
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      axios.get(`http://localhost:3006/slot/${id}`).then((response) => {
-        setData(response.data);
-      });
-    };
     fetchData();
   }, []);
 
@@ -24,8 +26,9 @@ const Booking = () => {
     const payload = {
       startBooking,
       endBooking,
-      status: "pending",
+      status: "waiting for approval",
       location: data.location,
+      username,
     };
 
     if (startBooking && endBooking) {

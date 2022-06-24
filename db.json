@@ -142,6 +142,13 @@
       "status": "pending",
       "location": "F1",
       "id": 4
+    },
+    {
+      "startBooking": "2022-06-30",
+      "endBooking": "2022-06-30",
+      "status": "pending",
+      "location": "B8",
+      "id": 5
     }
   ]
 }
