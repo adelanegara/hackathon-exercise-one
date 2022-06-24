@@ -115,6 +115,13 @@
     }
   ],
   "request": [
-  
+    {
+      "startBooking": "2022-06-29",
+      "endBooking": "2022-06-29",
+      "status": "waiting for approval",
+      "location": "B8",
+      "username": "banban",
+      "id": 1
+    }
   ]
 }
