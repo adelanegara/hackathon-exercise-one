@@ -38,6 +38,7 @@ const Home = () => {
         <h2 className="text-lg-center pt-2">
             Hi {username}, your role is {role}
           </h2>
+          {role === "owner" && (
         <div class="container py-5">
   <div class="row">
     <div class="col">
@@ -59,6 +60,7 @@ const Home = () => {
   </div>
 
 </div>
+          )}
        
 
           <table className="table">
