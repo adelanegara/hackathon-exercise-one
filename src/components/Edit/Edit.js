@@ -2,13 +2,20 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
+import Switch from "@mui/material/Switch";
 
 const Edit = () => {
   const navigate = useNavigate();
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [status, setStatus] = useState("");
   const [data, setData] = useState("");
+  const [isChecked, setIsChecked] = useState(false);
   const { id } = useParams();
+
+  const hanldeChecked = () => {
+    setIsChecked(!isChecked);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,10 +23,22 @@ const Edit = () => {
         setData(response.data);
         setStartDate(response.data.startDate);
         setEndDate(response.data.endDate);
+        setStatus(response.data.status);
+        if (response.data.status === "available") {
+          setIsChecked(true);
+        }
       });
     };
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if (isChecked) {
+      setStatus("available");
+    } else {
+      setStatus("unavailable");
+    }
+  }, [isChecked]);
 
   const edit = (e) => {
     e.preventDefault();
@@ -27,6 +46,7 @@ const Edit = () => {
       ...data,
       startDate,
       endDate,
+      status,
     };
 
     axios
@@ -41,15 +61,9 @@ const Edit = () => {
   return (
     <div className="container">
       <div className="row d-flex flex-column">
-        {/* <button
-          className="btn btn-dark ml-auto my-5"
-          onClick={() => navigate("/")}
-        >
-          Go back
-        </button> */}
         <div className="col-md-6 mx-auto shadow p-5">
           <form>
-          <div className="form-group">
+            <div className="form-group">
               <label>Start Date</label>
               <input
                 className="form-control"
@@ -67,6 +81,15 @@ const Edit = () => {
                 onChange={(e) => setEndDate(e.target.value)}
                 value={endDate}
               />
+            </div>
+            <div className="form-group">
+              <Switch
+                checked={isChecked}
+                onChange={(e) => {
+                  hanldeChecked(e);
+                }}
+              />
+              <label>{status}</label>
             </div>
             <div className="form-group d-flex align-items-center justify-content-between my-2">
               <button

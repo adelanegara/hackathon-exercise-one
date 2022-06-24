@@ -20,7 +20,7 @@
       "startBooking": null,
       "endBooking": null,
       "isBooking": null,
-      "status": "available",
+      "status": "unavailable",
       "id": 1
     },
     {
@@ -36,7 +36,7 @@
     {
       "location": "D2",
       "startDate": "2022-06-28",
-      "endDate": "2022-07-05",
+      "endDate": "2022-07-15",
       "startBooking": null,
       "endBooking": null,
       "isBooking": null,
