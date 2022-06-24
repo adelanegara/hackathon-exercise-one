@@ -101,8 +101,9 @@ const Login = () => {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: "url(https://source.unsplash.com/random)",
+            backgroundImage: "url(https://source.unsplash.com/aJGEVYOKE2Q)",
             backgroundRepeat: "no-repeat",
+
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
