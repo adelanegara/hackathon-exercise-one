@@ -84,7 +84,7 @@ const Home = () => {
                       <div>
                         <Link
                           to={`/edit/${item.id}`}
-                          className="btn btn-sm btn-primary mr-1"
+                          className="btn btn-sm btn-dark mr-1"
                         >
                           Edit
                         </Link>

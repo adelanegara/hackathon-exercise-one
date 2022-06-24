@@ -86,7 +86,7 @@
     {
       "location": "F4",
       "startDate": "2022-06-26",
-      "endDate": "2022-07-04",
+      "endDate": "2022-07-14",
       "startBooking": null,
       "endBooking": null,
       "isBooking": null,
@@ -118,7 +118,7 @@
     {
       "startBooking": "2022-06-29",
       "endBooking": "2022-06-29",
-      "status": "waiting for approval",
+      "status": "approved",
       "location": "B8",
       "username": "banban",
       "id": 1

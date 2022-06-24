@@ -51,7 +51,7 @@ const Login = () => {
           }}
         >
           <Typography component="h1" variant="h5">
-            Sign in
+            LOGIN
           </Typography>
           <Box
             component="form"
@@ -87,13 +87,26 @@ const Login = () => {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, bgcolor: "#fee715ff", color:"black" }}
             >
               Sign In
             </Button>
           </Box>
         </Box>
+       
       </Grid>
+      <Grid
+          item
+          xs={false}
+          sm={4}
+          md={7}
+          sx={{
+            backgroundImage: "url(https://source.unsplash.com/random)",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
     </Grid>
   );
 };

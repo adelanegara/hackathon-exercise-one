@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 
@@ -18,12 +17,11 @@ const style = {
   p: 4,
 };
 
-const Home = () => {
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
-  const navigate = useNavigate();
+const Request = () => {
+  const [open, setOpen] = React.useState(false);
+  const handleClose = () => setOpen(false);
   const [data, setData] = useState();
+  const [selectedData, setSelectedData] = useState();
 
   const fetchData = async () => {
     const reqList = await axios.get("http://localhost:3006/request");
@@ -33,31 +31,69 @@ const Home = () => {
     fetchData();
   }, []);
 
+  const handleOpen = (item) => {
+    setSelectedData(item);
+    setOpen(true);
+    console.log(item);
+  };
+
+  const onApprove = () => {
+    const payload = {
+      ...selectedData,
+      status: "approved",
+    };
+
+    axios
+      .put(`http://localhost:3006/request/${selectedData.id}`, payload)
+      .then(() => {
+        toast.success(`request booking ${selectedData.location} approved`);
+        handleClose();
+        fetchData();
+      })
+      .catch((error) => toast.error(error));
+  };
+
+  const onDecline = () => {
+    const payload = {
+      ...selectedData,
+      status: "declined",
+    };
+
+    axios
+      .put(`http://localhost:3006/request/${selectedData.id}`, payload)
+      .then(() => {
+        toast.warning(`request booking ${selectedData.location} declined`);
+        handleClose();
+        fetchData();
+      })
+      .catch((error) => toast.error(error));
+  };
+
+  const styleButton = (type) => {
+    if (type === "approved") {
+      return "btn-success";
+    }
+    if (type === "declined") {
+      return "btn-danger";
+    }
+    return "btn-primary";
+  };
+
   return (
     <div className="container">
       <div className="row  d-flex flex-column">
-<div className="col-md-10 mx-auto my-4">
-        <h2 className="text-lg-center pt-2">
-           Request Slot:
-          </h2>
+        <div className="col-md-10 mx-auto my-4">
+          <h2 className="text-lg-center pt-2">Request Slot:</h2>
           <div className="container py-5">
-          <div className="btn-group btn-group-toggle" data-toggle="buttons">
-  <Link
-         to={`/`}
-         className="btn btn-sm btn-secondary active mr-1"
-         >
-        Home
-       </Link> 
-  <Link
-         to={`/request`}
-         className="btn btn-sm btn-secondary mr-1"
-         >
-        Request
-        </Link>
-</div>
-
-</div>
-         
+            <div className="btn-group btn-group-toggle" data-toggle="buttons">
+              <Link to={`/`} className="btn btn-sm btn-secondary active mr-1">
+                Home
+              </Link>
+              <Link to={`/request`} className="btn btn-sm btn-secondary mr-1">
+                Request
+              </Link>
+            </div>
+          </div>
 
           <table className="table">
             <thead>
@@ -81,50 +117,92 @@ const Home = () => {
                   <td>{item.location}</td>
                   <td>{item.username}</td>
                   <td className="d-flex flex-row">
-                    
-                      <div>
-                      <button className="btn btn-sm btn-primary mr-1" onClick={handleOpen}> Approve </button> </div>
-
+                    <div>
+                      <button
+                        disabled={
+                          item.status === "declined" ||
+                          item.status === "approved"
+                        }
+                        className={`btn btn-sm mr-1 ${styleButton(
+                          item.status
+                        )}`}
+                        onClick={() => handleOpen(item)}
+                      >
+                        {item.status === "waiting for approval"
+                          ? "Approve"
+                          : item.status}
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
           <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-         
-        <div className="row d-flex flex-column">
-
-        <div className="col-md-6 mx-auto p-2">
-            <div className="form-group d-flex align-items-center justify-content-between my-2">
-              <button
-                type="submit"
-                className="btn btn-primary"
-              >
-                Approve
-              </button>
-              <button
-                type="button"
-                className="btn btn-danger"
-              >
-                Decline 
-              </button>
-            </div>
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <div className="row d-flex flex-column">
+                <div className="col mx-auto p-2">
+                  <div>
+                    <div className="text-info text-center mb-4">
+                      <strong>Request Detail</strong>
+                    </div>
+                    <table className="table">
+                      <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">:</th>
+                        <th scope="col">{selectedData?.id}</th>
+                      </tr>
+                      <tr>
+                        <th scope="col">Location</th>
+                        <th scope="col">:</th>
+                        <th scope="col">{selectedData?.location}</th>
+                      </tr>
+                      <tr>
+                        <th scope="col">Start Booking</th>
+                        <th scope="col">:</th>
+                        <th scope="col">{selectedData?.startBooking}</th>
+                      </tr>
+                      <tr>
+                        <th scope="col">End Booking</th>
+                        <th scope="col">:</th>
+                        <th scope="col">{selectedData?.endBooking}</th>
+                      </tr>
+                      <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">:</th>
+                        <th scope="col">{selectedData?.username}</th>
+                      </tr>
+                    </table>
+                    <div className="form-group d-flex align-items-center justify-content-between my-2">
+                      <button
+                        type="submit"
+                        className="btn btn-primary"
+                        onClick={onApprove}
+                      >
+                        Approve
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn-danger"
+                        onClick={onDecline}
+                      >
+                        Decline
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Box>
+          </Modal>
         </div>
-   
-        </div>
-        </Box>
-      </Modal>
-        </div>
-        
       </div>
     </div>
   );
 };
 
-export default Home;
+export default Request;
