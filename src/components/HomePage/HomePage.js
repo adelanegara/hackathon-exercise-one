@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-const Home = () => {
+const HomePage = () => {
   const navigate = useNavigate();
   const [data, setData] = useState();
   const username = localStorage.getItem("username");
@@ -86,52 +86,9 @@ const Home = () => {
             </tbody>
           </table>
         </div>
-        {/* <div className="col-md-10 mx-auto my-4">
-          <h2 className="text-lg-center">
-            Request Slot:
-          </h2>
-
-          <table className="table">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Start Date</th>
-                <th scope="col">End Date</th>
-                <th scope="col">Status</th>
-                <th scope="col">Location</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {req?.map((item, index) => (
-                <tr key={index}>
-                  <th scope="row">{index + 1}</th>
-                  <td>{item.startBooking}</td>
-                  <td>{item.endBooking}</td>
-                  <td>{item.status}</td>
-                  <td>{item.location}</td>
-                  <td className="d-flex flex-row">
-                    
-                      <div>
-                        <Link
-                          to={`/edit/${item.id}`}
-                          className="btn btn-sm btn-primary mr-1"
-                        >
-                          Edit
-                        </Link>
-                    
-                      </div>
-                 
-           
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div> */}
       </div>
     </div>
   );
 };
 
-export default Home;
+export default HomePage;

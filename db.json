@@ -135,7 +135,7 @@
     {
       "startBooking": "2022-06-27",
       "endBooking": "2022-06-27",
-      "status": "waiting for approval",
+      "status": "declined",
       "location": "B5",
       "username": "banban",
       "idSlot": 1,

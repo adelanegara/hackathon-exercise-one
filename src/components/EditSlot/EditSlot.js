@@ -6,7 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Switch from "@mui/material/Switch";
 
 //what is the component will do 
-const Edit = () => {
+const EditSlot = () => {
   const navigate = useNavigate();
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
@@ -116,4 +116,4 @@ const Edit = () => {
   );
 };
 
-export default Edit;
+export default EditSlot;

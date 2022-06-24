@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 
+//Modal style
 const style = {
   position: "absolute",
   top: "50%",
@@ -18,13 +19,14 @@ const style = {
   p: 4,
 };
 
-const Request = () => {
-  const [open, setOpen] = React.useState(false);
-  const handleClose = () => setOpen(false);
-  const [data, setData] = useState();
-  const role = localStorage.getItem("role");
-  const [selectedData, setSelectedData] = useState();
+const RequestSlot = () => {
+  const [open, setOpen] = React.useState(false);   //Modal close & open handler
+  const handleClose = () => setOpen(false);   //Modal close & open handler
+  const [data, setData] = useState(); //state for data from Request. 
+  const role = localStorage.getItem("role"); //get role from localStrorage
+  const [selectedData, setSelectedData] = useState(); 
 
+  //fetch data and shows list from request
   const fetchData = async () => {
     const reqList = await axios.get(config.url_request);
     setData(reqList.data);
@@ -36,7 +38,6 @@ const Request = () => {
   const handleOpen = (item) => {
     setSelectedData(item);
     setOpen(true);
-    console.log(item);
   };
 
   const onApprove = () => {
@@ -220,4 +221,4 @@ const Request = () => {
   );
 };
 
-export default Request;
+export default RequestSlot;

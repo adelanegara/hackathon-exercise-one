@@ -4,7 +4,7 @@ import { config } from "../../server/config";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const Booking = () => {
+const BookingSlot = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [data, setData] = useState();
@@ -114,4 +114,4 @@ const Booking = () => {
   );
 };
 
-export default Booking;
+export default BookingSlot;
