@@ -41,12 +41,12 @@ const Edit = () => {
   return (
     <div className="container">
       <div className="row d-flex flex-column">
-        <button
+        {/* <button
           className="btn btn-dark ml-auto my-5"
           onClick={() => navigate("/")}
         >
           Go back
-        </button>
+        </button> */}
         <div className="col-md-6 mx-auto shadow p-5">
           <form>
           <div className="form-group">

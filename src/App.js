@@ -7,6 +7,8 @@ import Login from "./components/Login/Login";
 import Navbar from "./components/Navbar/Navbar";
 import Edit from "./components/Edit/Edit";
 import Booking from "./components/Booking/Booking";
+import Request from "./components/Request/Request";
+import Approve from "./components/Approve/Approve";
 
 
 
@@ -19,6 +21,9 @@ function App() {
       </div>
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/request" element={<Request />} />
+        <Route path="/approve" element={<Approve />} />
+
         <Route path="/booking/:id" element={<Booking />} />
         <Route path="/edit/:id" element={<Edit />} />
         <Route path="/" element={<PrivateRoutes component={Home} />} />
