@@ -40,25 +40,21 @@ const Home = () => {
         <h2 className="text-lg-center pt-2">
            Request Slot:
           </h2>
-        <div class="container py-5">
-  <div class="row">
-    <div class="col">
-    <Link
+          <div className="container py-5">
+          <div className="btn-group btn-group-toggle" data-toggle="buttons">
+  <Link
          to={`/`}
-         className="btn btn-sm btn-primary mr-1"
+         className="btn btn-sm btn-secondary active mr-1"
          >
         Home
-       </Link>
-    </div>
-    <div class="col">
-    <Link
+       </Link> 
+  <Link
          to={`/request`}
-         className="btn btn-sm btn-primary mr-1"
+         className="btn btn-sm btn-secondary mr-1"
          >
         Request
         </Link>
-    </div>
-  </div>
+</div>
 
 </div>
          
@@ -120,12 +116,7 @@ const Home = () => {
               </button>
             </div>
         </div>
-        <button
-          className="btn btn-dark ml-auto "
-          onClick={() => navigate("/")}
-        >
-          Go back
-        </button>
+   
         </div>
         </Box>
       </Modal>

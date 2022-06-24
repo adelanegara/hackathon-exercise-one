@@ -39,25 +39,22 @@ const Home = () => {
             Hi {username}, your role is {role}
           </h2>
           {role === "owner" && (
-        <div class="container py-5">
-  <div class="row">
-    <div class="col">
-    <Link
+        <div className="container py-5">
+          <div className="btn-group btn-group-toggle" data-toggle="buttons">
+  <Link
          to={`/`}
-         className="btn btn-sm btn-primary mr-1"
+         className="btn btn-sm btn-secondary active mr-1"
          >
         Home
-       </Link>
-    </div>
-    <div class="col">
-    <Link
+       </Link> 
+  <Link
          to={`/request`}
-         className="btn btn-sm btn-primary mr-1"
+         className="btn btn-sm btn-secondary mr-1"
          >
         Request
         </Link>
-    </div>
-  </div>
+
+</div>
 
 </div>
           )}
