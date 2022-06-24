@@ -16,7 +16,7 @@
     {
       "location": "B5",
       "startDate": "2022-06-27",
-      "endDate": "2022-07-02",
+      "endDate": "2022-06-27",
       "startBooking": null,
       "endBooking": null,
       "isBooking": null,
@@ -46,11 +46,11 @@
     {
       "location": "D5",
       "startDate": "2022-06-29",
-      "endDate": "2022-07-03",
+      "endDate": "2022-07-13",
       "startBooking": null,
       "endBooking": null,
       "isBooking": null,
-      "status": "available",
+      "status": "unavailable",
       "id": 4
     },
     {
@@ -116,12 +116,21 @@
   ],
   "request": [
     {
-      "startBooking": "2022-06-29",
-      "endBooking": "2022-06-29",
+      "startBooking": "2022-06-27",
+      "endBooking": "2022-06-27",
       "status": "approved",
-      "location": "B8",
+      "location": "B5",
       "username": "banban",
       "id": 1
+    },
+    {
+      "startBooking": "2022-06-30",
+      "endBooking": "2022-06-30",
+      "status": "approved",
+      "location": "D5",
+      "username": "banban",
+      "idSlot": 4,
+      "id": 2
     }
   ]
 }

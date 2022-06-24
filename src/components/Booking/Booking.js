@@ -29,6 +29,7 @@ const Booking = () => {
       status: "waiting for approval",
       location: data.location,
       username,
+      idSlot: data.id,
     };
 
     if (startBooking && endBooking) {

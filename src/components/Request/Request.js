@@ -22,8 +22,6 @@ const Request = () => {
   const handleClose = () => setOpen(false);
   const [data, setData] = useState();
   const [selectedData, setSelectedData] = useState();
-  const role = localStorage.getItem("role");
-
 
   const fetchData = async () => {
     const reqList = await axios.get("http://localhost:3006/request");
@@ -44,13 +42,22 @@ const Request = () => {
       ...selectedData,
       status: "approved",
     };
-
+    const urlRequest = `http://localhost:3006/request/${selectedData.id}`;
+    const urlSlot = `http://localhost:3006/slot/${selectedData.idSlot}`;
     axios
-      .put(`http://localhost:3006/request/${selectedData.id}`, payload)
+      .put(urlRequest, payload)
       .then(() => {
-        toast.success(`request booking ${selectedData.location} approved`);
-        handleClose();
-        fetchData();
+        axios.get(urlSlot).then((response) => {
+          const payload = {
+            ...response.data,
+            status: "unavailable",
+          };
+          axios.put(urlSlot, payload).then(() => {
+            toast.success(`request booking ${selectedData.location} approved`);
+            handleClose();
+            fetchData();
+          });
+        });
       })
       .catch((error) => toast.error(error));
   };
@@ -106,9 +113,7 @@ const Request = () => {
                 <th scope="col">Status</th>
                 <th scope="col">Location</th>
                 <th scope="col">Username</th>
-                {role === "owner" && (
                 <th scope="col">Action</th>
-                )}
               </tr>
             </thead>
             <tbody>
@@ -120,7 +125,6 @@ const Request = () => {
                   <td>{item.status}</td>
                   <td>{item.location}</td>
                   <td>{item.username}</td>
-                  {role === "owner" && (
                   <td className="d-flex flex-row">
                     <div>
                       <button
@@ -139,7 +143,6 @@ const Request = () => {
                       </button>
                     </div>
                   </td>
-                  )}
                 </tr>
               ))}
             </tbody>

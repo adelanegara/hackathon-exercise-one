@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import Switch from "@mui/material/Switch";
 
+//what is the component will do 
 const Edit = () => {
   const navigate = useNavigate();
   const [startDate, setStartDate] = useState("");
@@ -19,7 +20,7 @@ const Edit = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      axios.get(`http://localhost:3006/slot/${id}`).then((response) => {
+      axios.get(`http://localhost:8080/slot/${id}`).then((response) => {
         setData(response.data);
         setStartDate(response.data.startDate);
         setEndDate(response.data.endDate);
@@ -50,7 +51,7 @@ const Edit = () => {
     };
 
     axios
-      .put(`http://localhost:3006/slot/${id}`, payload)
+      .put(`http://localhost:8080/slot/${id}`, payload)
       .then(() => {
         toast.success(`update date for location ${data.location} successfully`);
         navigate("/");

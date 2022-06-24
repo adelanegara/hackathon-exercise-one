@@ -18,35 +18,24 @@ const Home = () => {
     fetchData();
   }, []);
 
-
-
   return (
     <div className="container">
       <div className="row  d-flex flex-column">
-   
         <div className="col-md-10 mx-auto my-4">
-        <h2 className="text-lg-center pt-2">
+          <h2 className="text-lg-center pt-2">
             Hi {username}, your role is {role}
           </h2>
-        
-        <div className="container py-5">
-          <div className="btn-group btn-group-toggle" data-toggle="buttons">
-  <Link
-         to={`/`}
-         className="btn btn-sm btn-secondary active mr-1"
-         >
-        Home
-       </Link> 
-  <Link
-         to={`/request`}
-         className="btn btn-sm btn-secondary mr-1"
-         >
-        Request
-        </Link>
 
-</div>
-
-</div>
+          <div className="container py-5">
+            <div className="btn-group btn-group-toggle" data-toggle="buttons">
+              <Link to={`/`} className="btn btn-sm btn-secondary active mr-1">
+                Home
+              </Link>
+              <Link to={`/request`} className="btn btn-sm btn-secondary mr-1">
+                Request
+              </Link>
+            </div>
+          </div>
 
           <table className="table">
             <thead>
@@ -60,36 +49,39 @@ const Home = () => {
               </tr>
             </thead>
             <tbody>
-              {data?.map((item, index) => (
-                <tr key={index}>
-                  <th scope="row">{index + 1}</th>
-                  <td>{item.location}</td>
-                  <td>{item.startDate}</td>
-                  <td>{item.endDate}</td>
-                  <td>{item.status}</td>
-                  <td className="d-flex flex-row">
-                    {role === "owner" && (
-                      <div>
-                        <Link
-                          to={`/edit/${item.id}`}
-                          className="btn btn-sm btn-dark mr-1"
+              {data?.map((item, index) => {
+                const isAvailable = item.status === "available";
+                return (
+                  <tr key={index}>
+                    <th scope="row">{index + 1}</th>
+                    <td>{item.location}</td>
+                    <td>{item.startDate}</td>
+                    <td>{item.endDate}</td>
+                    <td>{item.status}</td>
+                    <td className="d-flex flex-row">
+                      {role === "owner" && (
+                        <div>
+                          <Link
+                            to={`/edit/${item.id}`}
+                            className="btn btn-sm btn-dark mr-1"
+                          >
+                            Edit
+                          </Link>
+                        </div>
+                      )}
+                      {role === "user" && (
+                        <button
+                          disabled={!isAvailable}
+                          className="btn btn-sm btn-primary mr-1"
+                          onClick={() => navigate(`/booking/${item.id}`)}
                         >
-                          Edit
-                        </Link>
-                    
-                      </div>
-                    )}
-                    {role === "user" && (
-                      <button
-                        className="btn btn-sm btn-primary mr-1"
-                        onClick={() => navigate(`/booking/${item.id}`)}
-                      >
-                        {item.status === "available" ? "Book" : "Booked"}
-                      </button>
-                    )}
-                  </td>
-                </tr>
-              ))}
+                          {isAvailable ? "Book" : "Booked"}
+                        </button>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
@@ -136,7 +128,6 @@ const Home = () => {
             </tbody>
           </table>
         </div> */}
-        
       </div>
     </div>
   );
