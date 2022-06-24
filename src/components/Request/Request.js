@@ -22,6 +22,8 @@ const Request = () => {
   const handleClose = () => setOpen(false);
   const [data, setData] = useState();
   const [selectedData, setSelectedData] = useState();
+  const role = localStorage.getItem("role");
+
 
   const fetchData = async () => {
     const reqList = await axios.get("http://localhost:3006/request");
@@ -104,7 +106,9 @@ const Request = () => {
                 <th scope="col">Status</th>
                 <th scope="col">Location</th>
                 <th scope="col">Username</th>
+                {role === "owner" && (
                 <th scope="col">Action</th>
+                )}
               </tr>
             </thead>
             <tbody>
@@ -116,6 +120,7 @@ const Request = () => {
                   <td>{item.status}</td>
                   <td>{item.location}</td>
                   <td>{item.username}</td>
+                  {role === "owner" && (
                   <td className="d-flex flex-row">
                     <div>
                       <button
@@ -134,6 +139,7 @@ const Request = () => {
                       </button>
                     </div>
                   </td>
+                  )}
                 </tr>
               ))}
             </tbody>

@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 const Home = () => {
   const navigate = useNavigate();
   const [data, setData] = useState();
-  // const [req, setReq] = useState();
   const username = localStorage.getItem("username");
   const role = localStorage.getItem("role");
 
@@ -19,15 +18,6 @@ const Home = () => {
     fetchData();
   }, []);
 
-  // const fetchRequest = async () => {
-  //   const reqList = await axios.get("http://localhost:3006/request");
-  //   setReq(reqList.req);
-  // };
-  // useEffect(() => {
-  //   fetchRequest();
-  // }, []);
-  
-
 
 
   return (
@@ -38,7 +28,7 @@ const Home = () => {
         <h2 className="text-lg-center pt-2">
             Hi {username}, your role is {role}
           </h2>
-          {role === "owner" && (
+        
         <div className="container py-5">
           <div className="btn-group btn-group-toggle" data-toggle="buttons">
   <Link
@@ -57,8 +47,6 @@ const Home = () => {
 </div>
 
 </div>
-          )}
-       
 
           <table className="table">
             <thead>
