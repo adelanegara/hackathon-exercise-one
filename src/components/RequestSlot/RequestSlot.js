@@ -35,6 +35,7 @@ const RequestSlot = () => {
     fetchData();
   }, []);
 
+  //Modal open handler 
   const handleOpen = (item) => {
     setSelectedData(item);
     setOpen(true);
