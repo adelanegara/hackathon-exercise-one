@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { connect } from "react-redux";
-
-
 
 import { Button, TextField, Paper, Box, Grid, Typography } from "@mui/material";
 import { toast } from "react-toastify";
@@ -120,5 +117,4 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export { Login as LoginUnwrapped };
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

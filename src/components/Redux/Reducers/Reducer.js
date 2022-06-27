@@ -117,28 +117,36 @@ const initialState = {
     ],
     request: null,
   };
-
-  export const whitelist = [ "isLogin", "userData", "account"];
-
-   
-export const Reducer = (state = initialState, action) => {
+  
+  export const whitelist = ["isLogin", "userData", "account", "slot"];
+  
+  export const Reducer = (state = initialState, action) => {
     switch (action.type) {
-        case "LOGIN":
-          return {
-            ...state,
-            isLogin: true,
-          };
-        case "LOGOUT":
-          return {
-            ...state,
-            isLogin: false,
-          };
-        case "SET_USER_DATA":
-          return {
-            ...state,
-            userData: action.payload,
-          };
-        default:
-          return state;
-      }
-}
+      case "LOGIN":
+        return {
+          ...state,
+          isLogin: true,
+        };
+      case "LOGOUT":
+        return {
+          ...state,
+          isLogin: false,
+        };
+      case "SET_USER_DATA":
+        return {
+          ...state,
+          userData: action.payload,
+        };
+      case "SET_SLOT":
+        const slot = state.slot.filter((item) => {
+          return item.id !== action.payload.id;
+        });
+        const newSlot = [action.payload, ...slot];
+        return {
+          ...state,
+          slot: newSlot,
+        };
+      default:
+        return state;
+    }
+  };

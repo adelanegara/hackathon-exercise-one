@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { config } from "../../server/config";
+import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import Switch from "@mui/material/Switch";
 
-//what is the component will do 
-const EditSlot = () => {
+//what is the component will do
+const EditSlot = ({ slot, editSlot }) => {
   const navigate = useNavigate();
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
@@ -15,24 +14,25 @@ const EditSlot = () => {
   const [isChecked, setIsChecked] = useState(false);
   const { id } = useParams();
 
+  //togle status
   const hanldeChecked = () => {
     setIsChecked(!isChecked);
   };
 
   useEffect(() => {
-    const fetchData =  () => {
-      axios.get(`${config.url_slot}/${id}`).then((response) => {
-        setData(response.data);
-        setStartDate(response.data.startDate);
-        setEndDate(response.data.endDate);
-        setStatus(response.data.status);
-        if (response.data.status === "available") {
-          setIsChecked(true);
-        }
-      });
-    };
-    fetchData();
-  }, []);
+    const findSlot = slot.find((item) => {
+      return item.id === parseInt(id);
+    });
+    if (findSlot) {
+      setData(findSlot);
+      setStartDate(findSlot.startDate);
+      setEndDate(findSlot.endDate);
+      setStatus(findSlot.status);
+      if (findSlot.status === "available") {
+        setIsChecked(true);
+      }
+    }
+  }, [slot, id]);
 
   useEffect(() => {
     if (isChecked) {
@@ -50,14 +50,9 @@ const EditSlot = () => {
       endDate,
       status,
     };
-
-    axios
-      .put(`${config.url_slot}/${id}`, payload)
-      .then(() => {
-        toast.success(`update date for location ${data.location} successfully`);
-        navigate("/");
-      })
-      .catch((error) => toast.error(error));
+    editSlot(payload);
+    toast.success(`update date for location ${data.location} successfully`);
+    navigate("/");
   };
 
   return (
@@ -70,9 +65,8 @@ const EditSlot = () => {
               <input
                 className="form-control"
                 type="date"
-                min={startDate}
-                onChange={(e) => setEndDate(e.target.value)}
-                value={endDate}
+                onChange={(e) => setStartDate(e.target.value)}
+                value={startDate}
               />
             </div>
             <div className="form-group">
@@ -80,6 +74,7 @@ const EditSlot = () => {
               <input
                 className="form-control"
                 type="date"
+                min={startDate}
                 onChange={(e) => setEndDate(e.target.value)}
                 value={endDate}
               />
@@ -116,4 +111,14 @@ const EditSlot = () => {
   );
 };
 
-export default EditSlot;
+const mapStateToProps = (state) => ({
+  slot: state.slot,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  editSlot: (payload, id) => {
+    dispatch({ type: "SET_SLOT", payload });
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditSlot);
