@@ -1,17 +1,17 @@
 {
-  // "user": [
-  //   {
-  //     "username": "adele",
-  //     "password": "la123",
-  //     "role": "owner"
-  //   },
-  //   {
-  //     "username": "banban",
-  //     "password": "ban123",
-  //     "role": "user",
-  //     "myBooking": []
-  //   }
-  // ],
+  "user": [
+    {
+      "username": "adele",
+      "password": "la123",
+      "role": "owner"
+    },
+    {
+      "username": "banban",
+      "password": "ban123",
+      "role": "user",
+      "myBooking": []
+    }
+  ],
   "slot": [
     {
       "location": "B5",
@@ -130,6 +130,24 @@
       "username": "banban",
       "idSlot": 1,
       "id": 3
+    },
+    {
+      "startBooking": "2022-06-30",
+      "endBooking": "2022-06-30",
+      "status": "waiting for approval",
+      "location": "D8",
+      "username": null,
+      "idSlot": 5,
+      "id": 4
+    },
+    {
+      "startBooking": "2022-06-29",
+      "endBooking": "2022-06-30",
+      "status": "waiting for approval",
+      "location": "D2",
+      "username": null,
+      "idSlot": 3,
+      "id": 5
     }
   ]
 }

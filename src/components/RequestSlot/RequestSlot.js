@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
 import { config } from "../../server/config";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -19,11 +20,11 @@ const style = {
   p: 4,
 };
 
-const RequestSlot = () => {
+const RequestSlot = ({userData}) => {
   const [open, setOpen] = React.useState(false);   //Modal close & open handler
   const handleClose = () => setOpen(false);   //Modal close & open handler
   const [data, setData] = useState(); //state for data from Request. 
-  const role = localStorage.getItem("role"); //get role from localStrorage
+  // const role = localStorage.getItem("role"); //get role from localStrorage
   const [selectedData, setSelectedData] = useState(); 
 
   //fetch data and shows list from request
@@ -117,7 +118,7 @@ const RequestSlot = () => {
                 <th scope="col">Status</th>
                 <th scope="col">Location</th>
                 <th scope="col">Username</th>
-                {role === "owner" && (
+                {userData?.role === "owner" && (
                 <th scope="col">Action</th>
                 )}
               </tr>
@@ -131,7 +132,7 @@ const RequestSlot = () => {
                   <td>{item.status}</td>
                   <td>{item.location}</td>
                   <td>{item.username}</td>
-                  {role === "owner" && (
+                  {userData?.role === "owner" && (
                   <td className="d-flex flex-row">
                     <div>
                       <button
@@ -222,4 +223,8 @@ const RequestSlot = () => {
   );
 };
 
-export default RequestSlot;
+const mapStateToProps = (state) => ({
+  userData: state.userData,
+});
+
+export default connect(mapStateToProps)(RequestSlot)

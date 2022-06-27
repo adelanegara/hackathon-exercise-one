@@ -4,8 +4,10 @@ import { config } from "../../server/config";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { connect } from "react-redux";
 
-const HomePage = () => {
+
+const HomePage = ({userData}) => {
   const navigate = useNavigate();
   const [data, setData] = useState();
   const username = localStorage.getItem("username");
@@ -24,7 +26,7 @@ const HomePage = () => {
       <div className="row  d-flex flex-column">
         <div className="col-md-10 mx-auto my-4">
           <h2 className="text-lg-center pt-2">
-            Hi {username}, your role is {role}
+            Hi {userData?.username}, your role is {userData?.role}
           </h2>
 
           <div className="container py-5">
@@ -60,7 +62,7 @@ const HomePage = () => {
                     <td>{item.endDate}</td>
                     <td>{item.status}</td>
                     <td className="d-flex flex-row">
-                      {role === "owner" && (
+                      {userData?.role === "owner" && (
                         <div>
                           <Link
                             to={`/edit/${item.id}`}
@@ -70,7 +72,7 @@ const HomePage = () => {
                           </Link>
                         </div>
                       )}
-                      {role === "user" && (
+                      {userData?.role === "user" && (
                         <button
                           disabled={!isAvailable}
                           className="btn btn-sm btn-primary mr-1"
@@ -91,4 +93,8 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+const mapStateToProps = (state) => ({
+  userData: state.userData,
+});
+
+export default connect(mapStateToProps)(HomePage)
