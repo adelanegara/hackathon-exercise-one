@@ -20,12 +20,12 @@ const style = {
   p: 4,
 };
 
-const RequestSlot = ({userData}) => {
-  const [open, setOpen] = React.useState(false);   //Modal close & open handler
-  const handleClose = () => setOpen(false);   //Modal close & open handler
-  const [data, setData] = useState(); //state for data from Request. 
+const RequestSlot = ({ userData, request }) => {
+  const [open, setOpen] = React.useState(false); //Modal close & open handler
+  const handleClose = () => setOpen(false); //Modal close & open handler
+  const [data, setData] = useState(); //state for data from Request.
   // const role = localStorage.getItem("role"); //get role from localStrorage
-  const [selectedData, setSelectedData] = useState(); 
+  const [selectedData, setSelectedData] = useState();
 
   //fetch data and shows list from request
   const fetchData = async () => {
@@ -33,10 +33,10 @@ const RequestSlot = ({userData}) => {
     setData(reqList.data);
   };
   useEffect(() => {
-    fetchData();
-  }, []);
+    setData(request);
+  }, [request]);
 
-  //Modal open handler 
+  //Modal open handler
   const handleOpen = (item) => {
     setSelectedData(item);
     setOpen(true);
@@ -118,9 +118,7 @@ const RequestSlot = ({userData}) => {
                 <th scope="col">Status</th>
                 <th scope="col">Location</th>
                 <th scope="col">Username</th>
-                {userData?.role === "owner" && (
-                <th scope="col">Action</th>
-                )}
+                {userData?.role === "owner" && <th scope="col">Action</th>}
               </tr>
             </thead>
             <tbody>
@@ -133,24 +131,24 @@ const RequestSlot = ({userData}) => {
                   <td>{item.location}</td>
                   <td>{item.username}</td>
                   {userData?.role === "owner" && (
-                  <td className="d-flex flex-row">
-                    <div>
-                      <button
-                        disabled={
-                          item.status === "declined" ||
-                          item.status === "approved"
-                        }
-                        className={`btn btn-sm mr-1 ${styleButton(
-                          item.status
-                        )}`}
-                        onClick={() => handleOpen(item)}
-                      >
-                        {item.status === "waiting for approval"
-                          ? "Approve"
-                          : item.status}
-                      </button>
-                    </div>
-                  </td>
+                    <td className="d-flex flex-row">
+                      <div>
+                        <button
+                          disabled={
+                            item.status === "declined" ||
+                            item.status === "approved"
+                          }
+                          className={`btn btn-sm mr-1 ${styleButton(
+                            item.status
+                          )}`}
+                          onClick={() => handleOpen(item)}
+                        >
+                          {item.status === "waiting for approval"
+                            ? "Approve"
+                            : item.status}
+                        </button>
+                      </div>
+                    </td>
                   )}
                 </tr>
               ))}
@@ -225,6 +223,7 @@ const RequestSlot = ({userData}) => {
 
 const mapStateToProps = (state) => ({
   userData: state.userData,
+  request: state.request,
 });
 
-export default connect(mapStateToProps)(RequestSlot)
+export default connect(mapStateToProps)(RequestSlot);

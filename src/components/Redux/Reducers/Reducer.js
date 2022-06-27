@@ -115,10 +115,10 @@ const initialState = {
         id: 10,
       },
     ],
-    request: null,
+    request: [],
   };
   
-  export const whitelist = ["isLogin", "userData", "account", "slot"];
+  export const whitelist = ["isLogin", "userData", "account", "slot", "request"];
   
   export const Reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -145,6 +145,11 @@ const initialState = {
         return {
           ...state,
           slot: newSlot,
+        };
+      case "ADD_REQUEST":
+        return {
+          ...state,
+          request: [action.payload, ...state.request],
         };
       default:
         return state;

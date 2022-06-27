@@ -1,26 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { config } from "../../server/config";
-import axios from "axios";
+import { connect } from "react-redux";
 import { toast } from "react-toastify";
 
-const BookingSlot = () => {
+const BookingSlot = ({ slot, addRequest, userData }) => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [data, setData] = useState();
   const [startBooking, setStartBooking] = useState();
   const [endBooking, setEndBooking] = useState();
-  const username = localStorage.getItem("username");
-
-  const fetchData =  () => {
-    axios.get(`${config.url_slot}/${id}`).then((response) => {
-      setData(response.data);
-    });
-  };
+  const { username } = userData;
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    const findSlot = slot.find((item) => {
+      return item.id === parseInt(id);
+    });
+    if (findSlot) {
+      setData(findSlot);
+    }
+  }, [slot, id]);
 
   const booking = (e) => {
     e.preventDefault();
@@ -34,15 +32,11 @@ const BookingSlot = () => {
     };
 
     if (startBooking && endBooking) {
-      axios
-        .post(config.url_request, payload)
-        .then(() => {
-          toast.success(
-            `request booking for location ${data.location} successfully`
-          );
-          navigate("/");
-        })
-        .catch((error) => toast.error(error));
+      addRequest(payload);
+      toast.success(
+        `request booking for location ${data.location} successfully`
+      );
+      navigate("/");
     } else {
       toast.warning("please select start and end booking date");
     }
@@ -114,4 +108,15 @@ const BookingSlot = () => {
   );
 };
 
-export default BookingSlot;
+const mapStateToProps = (state) => ({
+  slot: state.slot,
+  userData: state.userData,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  addRequest: (payload) => {
+    dispatch({ type: "ADD_REQUEST", payload });
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(BookingSlot);

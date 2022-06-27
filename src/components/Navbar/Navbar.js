@@ -1,17 +1,11 @@
 import React from "react";
+import { connect } from "react-redux";
 import { AppBar, Box, Toolbar, Typography, Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const Navbar = () => {
-  const navigate = useNavigate();
+const Navbar = ({ isLogin, onLogout }) => {
 
-  const onLogout = () => {
-    localStorage.clear();
-    toast.success("logout successfully");
-    navigate("/login");
-  };
-  
+
   return (
     <div>
       <Box sx={{ flexGrow: 1 }} data-testid="navbar">
@@ -24,7 +18,7 @@ const Navbar = () => {
             >
              PARKING BOOKING
             </Typography>
-
+            {isLogin && (
             <Button
               data-testid="button-logout"
               style={{
@@ -37,6 +31,7 @@ const Navbar = () => {
             >
               Logout
             </Button>
+            )}
           </Toolbar>
         </AppBar>
       </Box>
@@ -44,5 +39,15 @@ const Navbar = () => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  isLogin: state.isLogin,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onLogout: () => {
+    dispatch({ type: "LOGOUT" });
+  },
+});
+
 export { Navbar as NavbarUnwrapped };
-export default Navbar;
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
