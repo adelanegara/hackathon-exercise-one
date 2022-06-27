@@ -119,10 +119,12 @@ const mapStateToProps = (state) => ({
   userData: state.userData,
 });
 
+//redux action
 const mapDispatchToProps = (dispatch) => ({
   addRequest: (payload) => {
     dispatch({ type: "ADD_REQUEST", payload });
   },
 });
 
+//combine the 2 state (action & selector from redux)
 export default connect(mapStateToProps, mapDispatchToProps)(BookingSlot);

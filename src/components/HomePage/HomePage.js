@@ -11,6 +11,7 @@ const HomePage = ({ userData, slot }) => {
       <div className="row  d-flex flex-column">
         <div className="col-md-10 mx-auto my-4">
           <h2 className="text-lg-center pt-2">
+            {/* get username and role from redux and display it */}
             Hi {userData?.username}, your role is {userData?.role}
           </h2>
 
@@ -40,6 +41,7 @@ const HomePage = ({ userData, slot }) => {
               {slot.map((item, index) => {
                 const isAvailable = item.status === "available";
                 return (
+                  // shows data from redux
                   <tr key={index}>
                     <th scope="row">{index + 1}</th>
                     <td>{item.location}</td>
@@ -59,13 +61,13 @@ const HomePage = ({ userData, slot }) => {
                         </div>
                       )}
                    {/* shows edit button if the role is user */}
-
                       {userData?.role === "user" && (
                         <button
                           disabled={!isAvailable}
                           className="btn btn-sm btn-primary mr-1"
                           onClick={() => navigate(`/booking/${item.id}`)}
                         >
+                          {/* if available equal to book, if not available booked */}
                           {isAvailable ? "Book" : "Booked"}
                         </button>
                       )}

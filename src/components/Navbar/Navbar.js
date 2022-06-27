@@ -61,5 +61,8 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
+
+export { Navbar as NavbarUnwrapped };
+
 //combine the 2 state (action & selector from redux)
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
