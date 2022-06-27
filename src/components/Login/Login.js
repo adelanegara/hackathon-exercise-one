@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-
 import { Button, TextField, Paper, Box, Grid, Typography } from "@mui/material";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
+//pass the parameter  account, onLogin, setUserData from redux
 const Login = ({ account, onLogin, setUserData }) => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
@@ -12,15 +12,23 @@ const Login = ({ account, onLogin, setUserData }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    //func to find account values from redux
     const checkAccount = account.find((item) => {
+      //check if the username & password match with the redux
       return item.username === username && item.password === password;
     });
+    //if the username and the password are match:
     if (checkAccount) {
+      //set the setUserData
       setUserData(checkAccount);
+      //set the onLogin to true
       onLogin();
+      //throw success message
       toast.success("Login Succesfully");
+      //navigate to homepage
       navigate("/");
     } else {
+      //if not match then throw error
       toast.error("Invalid username or password");
     }
   };

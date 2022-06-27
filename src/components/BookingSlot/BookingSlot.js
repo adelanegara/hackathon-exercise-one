@@ -22,6 +22,7 @@ const BookingSlot = ({ slot, addRequest, userData }) => {
 
   const booking = (e) => {
     e.preventDefault();
+    const idBooking = `SL${new Date().toISOString()}${data.location}`;
     const payload = {
       startBooking,
       endBooking,
@@ -29,6 +30,7 @@ const BookingSlot = ({ slot, addRequest, userData }) => {
       location: data.location,
       username,
       idSlot: data.id,
+      idBooking,
     };
 
     if (startBooking && endBooking) {

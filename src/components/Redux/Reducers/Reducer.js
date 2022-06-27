@@ -138,10 +138,10 @@ const initialState = {
           userData: action.payload,
         };
       case "SET_SLOT":
-        const slot = state.slot.filter((item) => {
+        const beforeSlot = state.slot.filter((item) => {
           return item.id !== action.payload.id;
         });
-        const newSlot = [action.payload, ...slot];
+        const newSlot = [action.payload, ...beforeSlot];
         return {
           ...state,
           slot: newSlot,
@@ -150,6 +150,16 @@ const initialState = {
         return {
           ...state,
           request: [action.payload, ...state.request],
+        };
+  
+      case "SET_REQUEST":
+        const beforeRequest = state.request.filter((item) => {
+          return item.idBooking !== action.payload.idBooking;
+        });
+        const newRequest = [action.payload, ...beforeRequest];
+        return {
+          ...state,
+          request: newRequest,
         };
       default:
         return state;

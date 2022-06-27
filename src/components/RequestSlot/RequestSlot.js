@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { config } from "../../server/config";
-import axios from "axios";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
@@ -20,18 +18,13 @@ const style = {
   p: 4,
 };
 
-const RequestSlot = ({ userData, request }) => {
+const RequestSlot = ({ userData, slot, request, setRequest, editSlot }) => {
   const [open, setOpen] = React.useState(false); //Modal close & open handler
   const handleClose = () => setOpen(false); //Modal close & open handler
   const [data, setData] = useState(); //state for data from Request.
-  // const role = localStorage.getItem("role"); //get role from localStrorage
   const [selectedData, setSelectedData] = useState();
 
   //fetch data and shows list from request
-  const fetchData = async () => {
-    const reqList = await axios.get(config.url_request);
-    setData(reqList.data);
-  };
   useEffect(() => {
     setData(request);
   }, [request]);
@@ -47,24 +40,20 @@ const RequestSlot = ({ userData, request }) => {
       ...selectedData,
       status: "approved",
     };
-    const urlRequest = `${config.url_request}/${selectedData.id}`;
-    const urlSlot = `${config.url_slot}/${selectedData.idSlot}`;
-    axios
-      .put(urlRequest, payload)
-      .then(() => {
-        axios.get(urlSlot).then((response) => {
-          const payload = {
-            ...response.data,
-            status: "unavailable",
-          };
-          axios.put(urlSlot, payload).then(() => {
-            toast.success(`request booking ${selectedData.location} approved`);
-            handleClose();
-            fetchData();
-          });
-        });
-      })
-      .catch((error) => toast.error(error));
+
+    const findSlot = slot.find((item) => {
+      return item.id === selectedData.idSlot;
+    });
+    if (findSlot) {
+      const newSlot = {
+        ...findSlot,
+        status: "unavailable",
+      };
+      setRequest(payload);
+      editSlot(newSlot);
+      toast.success(`request booking ${selectedData.location} approved`);
+      handleClose();
+    }
   };
 
   const onDecline = () => {
@@ -72,15 +61,9 @@ const RequestSlot = ({ userData, request }) => {
       ...selectedData,
       status: "declined",
     };
-
-    axios
-      .put(`${config.url_request}/${selectedData.id}`, payload)
-      .then(() => {
-        toast.warning(`request booking ${selectedData.location} declined`);
-        handleClose();
-        fetchData();
-      })
-      .catch((error) => toast.error(error));
+    setRequest(payload);
+    toast.warning(`request booking ${selectedData.location} declined`);
+    handleClose();
   };
 
   const styleButton = (type) => {
@@ -223,7 +206,17 @@ const RequestSlot = ({ userData, request }) => {
 
 const mapStateToProps = (state) => ({
   userData: state.userData,
+  slot: state.slot,
   request: state.request,
 });
 
-export default connect(mapStateToProps)(RequestSlot);
+const mapDispatchToProps = (dispatch) => ({
+  setRequest: (payload) => {
+    dispatch({ type: "SET_REQUEST", payload });
+  },
+  editSlot: (payload, id) => {
+    dispatch({ type: "SET_SLOT", payload });
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(RequestSlot);
