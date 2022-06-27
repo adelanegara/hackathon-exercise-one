@@ -1,18 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
 import { AppBar, Box, Toolbar, Typography, Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 //pass the parameter isLogin, onLogout from redux
 const Navbar = ({ isLogin, onLogout }) => {
-  const navigate = useNavigate();
 
   //handle logout UI
   const logout = () => {
     onLogout();
     toast.success("logout successfully");
-    navigate("/login");
+    window.location.replace("/login");
   };
 
   return (

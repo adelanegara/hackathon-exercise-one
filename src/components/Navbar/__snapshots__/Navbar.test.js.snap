@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test title ABC Bank 1`] = `
+<div
+  class="MuiTypography-root MuiTypography-h4 css-scyxek-MuiTypography-root"
+>
+  PARKING BOOKING
+</div>
+`;
