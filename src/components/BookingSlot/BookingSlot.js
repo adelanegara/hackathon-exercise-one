@@ -12,7 +12,7 @@ const BookingSlot = () => {
   const [endBooking, setEndBooking] = useState();
   const username = localStorage.getItem("username");
 
-  const fetchData = async () => {
+  const fetchData =  () => {
     axios.get(`${config.url_slot}/${id}`).then((response) => {
       setData(response.data);
     });

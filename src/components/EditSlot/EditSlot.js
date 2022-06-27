@@ -20,7 +20,7 @@ const EditSlot = () => {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData =  () => {
       axios.get(`${config.url_slot}/${id}`).then((response) => {
         setData(response.data);
         setStartDate(response.data.startDate);

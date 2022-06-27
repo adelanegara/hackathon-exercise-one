@@ -1,40 +1,33 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { config } from "../../server/config";
+import { connect } from "react-redux";
+
 
 
 import { Button, TextField, Paper, Box, Grid, Typography } from "@mui/material";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Login = ({ account, onLogin, setUserData }) => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const url = config.url_user;
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    axios
-      .get(url)
-      .then((response) => {
-        const checkAccount = response.data.find((item) => {
-          return item.username === username && item.password === password;
-        });
-        if (checkAccount) {
-          localStorage.setItem("isLogin", "true");
-          localStorage.setItem("username", checkAccount.username);
-          localStorage.setItem("role", checkAccount.role);
-          navigate("/");
-          toast.success("login successfully");
-        } else {
-          toast.warning("invalid username or password");
-        }
-      })
-      .catch((error) => {
-        toast.error(error);
-      });
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const checkAccount = account.find((item) => {
+      return item.username === username && item.password === password;
+    });
+    if (checkAccount) {
+      setUserData(checkAccount);
+      onLogin();
+      toast.success("Login Succesfully");
+      navigate("/");
+    } else {
+      toast.error("Invalid username or password");
+    }
   };
+
   return (
     <Grid
       container
@@ -58,7 +51,7 @@ const Login = () => {
           <Box
             component="form"
             noValidate
-            onSubmit={(e) => handleSubmit(e)}
+            onSubmit={handleSubmit}
             sx={{ mt: 1 }}
           >
             <TextField
@@ -114,4 +107,18 @@ const Login = () => {
   );
 };
 
-export default Login;
+const mapStateToProps = (state) => ({
+  account: state.account,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setUserData: (data) => {
+    dispatch({ type: "SET_USER_DATA", payload: data });
+  },
+  onLogin: () => {
+    dispatch({ type: "LOGIN" });
+  },
+});
+
+export { Login as LoginUnwrapped };
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
