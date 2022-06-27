@@ -1,26 +1,10 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { config } from "../../server/config";
-import { toast } from "react-toastify";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 
-
-const HomePage = ({userData}) => {
+const HomePage = ({ userData, slot }) => {
   const navigate = useNavigate();
-  const [data, setData] = useState();
-  const username = localStorage.getItem("username");
-  const role = localStorage.getItem("role");
-
-  const fetchData = async () => {
-    const slotList = await axios.get(config.url_slot);
-    setData(slotList.data);
-  };
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   return (
     <div className="container">
       <div className="row  d-flex flex-column">
@@ -52,7 +36,7 @@ const HomePage = ({userData}) => {
               </tr>
             </thead>
             <tbody>
-              {data?.map((item, index) => {
+              {slot.map((item, index) => {
                 const isAvailable = item.status === "available";
                 return (
                   <tr key={index}>
@@ -95,6 +79,7 @@ const HomePage = ({userData}) => {
 
 const mapStateToProps = (state) => ({
   userData: state.userData,
+  slot: state.slot,
 });
 
-export default connect(mapStateToProps)(HomePage)
+export default connect(mapStateToProps)(HomePage);
