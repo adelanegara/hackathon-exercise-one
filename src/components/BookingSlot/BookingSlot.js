@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
 
+//pass the parameter slot, addRequest, userData from redux
 const BookingSlot = ({ slot, addRequest, userData }) => {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -13,16 +14,18 @@ const BookingSlot = ({ slot, addRequest, userData }) => {
 
   useEffect(() => {
     const findSlot = slot.find((item) => {
-      return item.id === parseInt(id);
+      return item.id === parseInt(id); ////find slot with the id that the same with the id. parseInt(id) to make the str to int 
     });
-    if (findSlot) {
-      setData(findSlot);
+    if (findSlot) { // if found
+      setData(findSlot); //update data
     }
   }, [slot, id]);
 
   const booking = (e) => {
     e.preventDefault();
+    //generate booking id from slot. it has to be uniquely identified and not the same
     const idBooking = `SL${new Date().toISOString()}${data.location}`;
+    //update data
     const payload = {
       startBooking,
       endBooking,
@@ -33,14 +36,14 @@ const BookingSlot = ({ slot, addRequest, userData }) => {
       idBooking,
     };
 
-    if (startBooking && endBooking) {
+    if (startBooking && endBooking) { // user click start booking and endbooking for req slot
       addRequest(payload);
       toast.success(
-        `request booking for location ${data.location} successfully`
+        `request booking for location ${data.location} successfully` // success message
       );
       navigate("/");
     } else {
-      toast.warning("please select start and end booking date");
+      toast.warning("please select start and end booking date"); //error data uncompleate
     }
   };
 
@@ -110,6 +113,7 @@ const BookingSlot = ({ slot, addRequest, userData }) => {
   );
 };
 
+//redux selector 
 const mapStateToProps = (state) => ({
   slot: state.slot,
   userData: state.userData,

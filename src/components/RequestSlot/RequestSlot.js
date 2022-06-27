@@ -18,6 +18,7 @@ const style = {
   p: 4,
 };
 
+//pass the parameter  userData, slot, request, setRequest, editSlot from redux
 const RequestSlot = ({ userData, slot, request, setRequest, editSlot }) => {
   const [open, setOpen] = React.useState(false); //Modal close & open handler
   const handleClose = () => setOpen(false); //Modal close & open handler
@@ -29,12 +30,13 @@ const RequestSlot = ({ userData, slot, request, setRequest, editSlot }) => {
     setData(request);
   }, [request]);
 
-  //Modal open handler
+  //Modal Approve open handler
   const handleOpen = (item) => {
     setSelectedData(item);
     setOpen(true);
   };
 
+  //func approve, expand selectedData, change the status to approve
   const onApprove = () => {
     const payload = {
       ...selectedData,
@@ -42,30 +44,33 @@ const RequestSlot = ({ userData, slot, request, setRequest, editSlot }) => {
     };
 
     const findSlot = slot.find((item) => {
-      return item.id === selectedData.idSlot;
-    });
+      return item.id === selectedData.idSlot; //find slot with the id that the same with the idSlot
+    }); // if found
     if (findSlot) {
       const newSlot = {
         ...findSlot,
         status: "unavailable",
       };
-      setRequest(payload);
-      editSlot(newSlot);
-      toast.success(`request booking ${selectedData.location} approved`);
-      handleClose();
+      //expanded data from findSlot & change the status to unavailable
+      setRequest(payload); //update request
+      editSlot(newSlot); //update slot
+      toast.success(`request booking ${selectedData.location} approved`); //shows success 
+      handleClose(); //close popup 
     }
   };
 
+  //func decline, expand selectedData, change the status to decline. Then shows decline message
   const onDecline = () => {
     const payload = {
       ...selectedData,
       status: "declined",
     };
     setRequest(payload);
-    toast.warning(`request booking ${selectedData.location} declined`);
+    toast.warning(`request booking ${selectedData.location} declined`); //shows error 
     handleClose();
   };
 
+  //error handling
   const styleButton = (type) => {
     if (type === "approved") {
       return "btn-success";
@@ -101,10 +106,12 @@ const RequestSlot = ({ userData, slot, request, setRequest, editSlot }) => {
                 <th scope="col">Status</th>
                 <th scope="col">Location</th>
                 <th scope="col">Username</th>
+                {/* get data from user data role. Shows action if it's role is Owner */}
                 {userData?.role === "owner" && <th scope="col">Action</th>}
               </tr>
             </thead>
             <tbody>
+              {/* shows data to the table from redux initialState */}
               {data?.map((item, index) => (
                 <tr key={index}>
                   <th scope="row">{index + 1}</th>
@@ -117,6 +124,7 @@ const RequestSlot = ({ userData, slot, request, setRequest, editSlot }) => {
                     <td className="d-flex flex-row">
                       <div>
                         <button
+                        //disable button if it already approved or declined
                           disabled={
                             item.status === "declined" ||
                             item.status === "approved"
@@ -137,6 +145,8 @@ const RequestSlot = ({ userData, slot, request, setRequest, editSlot }) => {
               ))}
             </tbody>
           </table>
+
+          {/* Popup modal UI */}
           <Modal
             open={open}
             onClose={handleClose}
@@ -204,12 +214,14 @@ const RequestSlot = ({ userData, slot, request, setRequest, editSlot }) => {
   );
 };
 
+//redux selector 
 const mapStateToProps = (state) => ({
   userData: state.userData,
   slot: state.slot,
   request: state.request,
 });
 
+//redux action
 const mapDispatchToProps = (dispatch) => ({
   setRequest: (payload) => {
     dispatch({ type: "SET_REQUEST", payload });
@@ -219,4 +231,5 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
+//combine the 2 state (action & selector from redux)
 export default connect(mapStateToProps, mapDispatchToProps)(RequestSlot);

@@ -1,6 +1,7 @@
 const initialState = {
-    isLogin: false,
-    userData: null,
+    isLogin: false,     //default state before login
+    userData: null,     //default state before login
+    //credential information
     account: [
       {
         username: "adele",
@@ -118,8 +119,10 @@ const initialState = {
     request: [],
   };
   
+  //to make data stays after it logged out
   export const whitelist = ["isLogin", "userData", "account", "slot", "request"];
   
+  //action
   export const Reducer = (state = initialState, action) => {
     switch (action.type) {
       case "LOGIN":

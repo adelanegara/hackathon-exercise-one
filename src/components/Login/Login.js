@@ -101,7 +101,7 @@ const Login = ({ account, onLogin, setUserData }) => {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: "url(https://source.unsplash.com/random)",
+            backgroundImage: "url(https://source.unsplash.com/8GBIGNKqdjA)",
             backgroundRepeat: "no-repeat",
 
             backgroundSize: "cover",
@@ -112,10 +112,12 @@ const Login = ({ account, onLogin, setUserData }) => {
   );
 };
 
+//redux selector 
 const mapStateToProps = (state) => ({
   account: state.account,
 });
 
+//redux action
 const mapDispatchToProps = (dispatch) => ({
   setUserData: (data) => {
     dispatch({ type: "SET_USER_DATA", payload: data });
@@ -124,5 +126,5 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch({ type: "LOGIN" });
   },
 });
-
+//combine the 2 state (action & selector from redux)
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

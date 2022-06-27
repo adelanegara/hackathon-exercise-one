@@ -14,22 +14,23 @@ const EditSlot = ({ slot, editSlot }) => {
   const [isChecked, setIsChecked] = useState(false);
   const { id } = useParams();
 
-  //togle status
+  //togle switch status
   const hanldeChecked = () => {
     setIsChecked(!isChecked);
   };
 
   useEffect(() => {
-    const findSlot = slot.find((item) => {
-      return item.id === parseInt(id);
+    const findSlot = slot.find((item) => { 
+      return item.id === parseInt(id); //find slot with the id that the same with the id. parseInt(id) to make the str to int 
     });
-    if (findSlot) {
-      setData(findSlot);
-      setStartDate(findSlot.startDate);
-      setEndDate(findSlot.endDate);
-      setStatus(findSlot.status);
+    if (findSlot) {// if found
+     //expanded data from findSlot
+      setData(findSlot); //update data
+      setStartDate(findSlot.startDate); //update start date
+      setEndDate(findSlot.endDate); //update end date
+      setStatus(findSlot.status); //update status
       if (findSlot.status === "available") {
-        setIsChecked(true);
+        setIsChecked(true); //if status is available then togle is checked 
       }
     }
   }, [slot, id]);
@@ -42,6 +43,7 @@ const EditSlot = ({ slot, editSlot }) => {
     }
   }, [isChecked]);
 
+  //to update slot based on the input
   const edit = (e) => {
     e.preventDefault();
     const payload = {
@@ -80,6 +82,7 @@ const EditSlot = ({ slot, editSlot }) => {
               />
             </div>
             <div className="form-group">
+              {/* unavailable or available togle */}
               <Switch
                 checked={isChecked}
                 onChange={(e) => {
@@ -111,6 +114,7 @@ const EditSlot = ({ slot, editSlot }) => {
   );
 };
 
+//redux selector 
 const mapStateToProps = (state) => ({
   slot: state.slot,
 });

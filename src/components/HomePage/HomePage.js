@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 
+//pass the parameter userData, slot from redux
 const HomePage = ({ userData, slot }) => {
   const navigate = useNavigate();
   return (
@@ -46,6 +47,7 @@ const HomePage = ({ userData, slot }) => {
                     <td>{item.endDate}</td>
                     <td>{item.status}</td>
                     <td className="d-flex flex-row">
+                      {/* shows edit button if the role is owner */}
                       {userData?.role === "owner" && (
                         <div>
                           <Link
@@ -56,6 +58,8 @@ const HomePage = ({ userData, slot }) => {
                           </Link>
                         </div>
                       )}
+                   {/* shows edit button if the role is user */}
+
                       {userData?.role === "user" && (
                         <button
                           disabled={!isAvailable}
