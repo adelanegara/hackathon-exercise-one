@@ -115,10 +115,5 @@ const mapStateToProps = (state) => ({
   slot: state.slot,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  editSlot: (payload, id) => {
-    dispatch({ type: "SET_SLOT", payload });
-  },
-});
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditSlot);
+export default connect(mapStateToProps)(EditSlot);
